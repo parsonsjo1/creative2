@@ -17,7 +17,7 @@ var paths = {
     html: './src/**/*.html',
     images: './src/images/*.*',
     sass: './src/**/*.scss',
-    typescript: './src/**/*.js'
+    javascript: './src/**/*.js'
 };
 
 var watches = {
@@ -31,7 +31,7 @@ var watches = {
 
 /************************BrowserSync****************************/
 
-gulp.task('browser-sync', [watches.html,watches.images,watches.typescript,watches.sass], function() {
+gulp.task('browser-sync', [watches.html,watches.images,watches.javascript,watches.sass], function() {
     browserSync.init({
         server: {
             baseDir: "./dist"
@@ -96,7 +96,6 @@ gulp.task('copy-sass', function () {
   return gulp.src([paths.sass, paths.exclude])
     .pipe(concat('all.scss'))
     .pipe(sass().on('error', sass.logError))
-    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('dist'));
 });
 
