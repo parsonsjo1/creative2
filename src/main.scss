@@ -1,4 +1,40 @@
-body {
-  font: 100% Helvetica, sans-serif;
-  color: #000;
+html {
+	height: 100%;
+
+	body {
+		height: inherit;
+
+		.nav {
+
+		}
+
+		#featured-tracks {
+			.track {
+				height: 300px;
+				margin: 10px auto;
+				background-color: grey;
+			}
+		}
+
+		.container {
+
+		}
+
+
+
+	}
+}
+
+.btn {
+	width: 100%;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+img {
+	height: 200px;
+	width: 200px;
+	margin-top: 50px;
 }
