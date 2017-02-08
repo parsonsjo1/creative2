@@ -1,3 +1,4 @@
+
 html {
 	height: 100%;
 
@@ -10,6 +11,7 @@ html {
 
 			.navbar-brand {
 				font-size: 1.5em;
+				color: white;
 
 			}
 		}
@@ -20,20 +22,50 @@ html {
 			margin: 25px auto;
 
 			#featured-track {
-				background-color: #8285AC;
+				background-color: #BABBC5;
 				border-radius: 10px;
 				margin: 25px 0;
+				text-align: left;
 				
-				.track {
+				.track-picture {
 					height: 300px;
-					margin: 10px auto;
+					
+					img {
+						margin-top: 50px;
+					}
+				}
 
+				.track-info {
+					margin-top: 50px;
 				}
 			}
 		}
 
-		.container {
+		#search-container {
+			.btn {
+				width: 100%;
+				background-color: #FF7800;
 
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+
+		#results-container {
+			#result {
+				.fa-play,.fa-stop {
+					&:hover {
+						cursor: pointer;	
+					}
+				}
+
+				#track-file {
+					font-size: 0px;
+				}
+
+
+			}
 		}
 
 
@@ -41,20 +73,8 @@ html {
 	}
 }
 
-.btn {
-	width: 100%;
-
-	&:hover {
-		cursor: pointer;
-	}
-}
 
 img {
 	height: 200px;
 	width: 200px;
-	margin-top: 50px;
-}
-
-.btn {
-	background-color: #FF7800;
 }
