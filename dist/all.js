@@ -8,38 +8,52 @@ $(document).ready(function() {
 		var tracks = results.aTracks;
 		console.log(tracks);
 
-		for(i = 0; i < 4; i++) {
+		for(i = 0; i < 1; i++) {
 
 			//Grab desired data from json results
-			var baseUrl = "https://freemusicarchive.org/file/";
-			var albumImageUrl = baseUrl + tracks[i].album_image_file;
-			var albumTitle = tracks[i].album_title;
+			let baseUrl = "https://freemusicarchive.org/file/";
+			let albumImageUrl = baseUrl + tracks[i].album_image_file;
+			let albumTitle = tracks[i].album_title;
 			
-			var artistName = tracks[i].artist_name;
-			var artistWebsite = tracks[i].artist_website;
+			let artistName = tracks[i].artist_name;
+			let artistWebsite = tracks[i].artist_website;
 
-			var trackDownloads = tracks[i].track_downloads;
-			var trackFileUrl = tracks[i].track_file_url;
-			var trackImageUrl = tracks[i].track_image_file;
-			var trackListens = tracks[i].track_listens;
-			var trackTitle = tracks[i].track_title;
+			let trackDownloads = tracks[i].track_downloads;
+			let trackFileUrl = tracks[i].track_file_url;
+			let trackImageUrl = tracks[i].track_image_file;
+			let trackListens = tracks[i].track_listens;
+			let trackTitle = tracks[i].track_title;
 
 			console.log(albumImageUrl);
 
 
-			//Create featured track
-			$('#featured-tracks').append(
-				"<div class='track col-6 col-lg-4'>" +
+			//Create featured track of the week
+			$('#featured-track').append(
+				"<div class='track col-4'>" +
 					"<a href='" + "" + "'>" +
-						"<img src='" + albumImageUrl + "' alt='track image" + "'" +
+						"<img src='" + albumImageUrl + "' alt='track image" + "'>" +
 					"</a>" +
-					
-				"</div>"
-				//"<div class='track-info col-6'" +
+				"</div>" +
+				"<div class='track-info col-8'" +
+					"<p>Album Title: " + albumTitle + "</p>" +
+					"<p>Artist Name: " + artistName + "</p>" +
+					"<p>Artist Website: " + artistWebsite + "</p>" +
 
-				//"</div>"
+					"<p>Track Title: " + trackTitle + "</p>" +
+					"<p>Track Downloads: " + trackDownloads + "</p>" +
+					"<a href='#' id='track-file'>" + trackFileUrl + "</a>" +
+					"<p>Track Listens: " + trackListens + "</p>" +
+				"</div>"
 			)
 		}
 
 	});
-})
+
+});
+
+$('body').on('click', '#track-file', function() {
+		event.preventDefault();
+		let trackUrl = $('#track-file').text();
+		console.log(trackUrl);
+		new Audio(trackUrl).play(); 
+});

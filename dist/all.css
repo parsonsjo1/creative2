@@ -2,10 +2,21 @@ html {
   height: 100%; }
   html body {
     height: inherit; }
-    html body #featured-tracks .track {
-      height: 300px;
-      margin: 10px auto;
-      background-color: grey; }
+    html body .navbar {
+      font-size: 2em;
+      background-color: #070B40; }
+      html body .navbar .navbar-brand {
+        font-size: 1.5em; }
+    html body #featured-container {
+      text-align: center;
+      margin: 25px auto; }
+      html body #featured-container #featured-track {
+        background-color: #8285AC;
+        border-radius: 10px;
+        margin: 25px 0; }
+        html body #featured-container #featured-track .track {
+          height: 300px;
+          margin: 10px auto; }
 
 .btn {
   width: 100%; }
@@ -16,3 +27,6 @@ img {
   height: 200px;
   width: 200px;
   margin-top: 50px; }
+
+.btn {
+  background-color: #FF7800; }

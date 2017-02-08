@@ -4,15 +4,31 @@ html {
 	body {
 		height: inherit;
 
-		.nav {
+		.navbar {
+			font-size: 2em;
+			background-color: #070B40;
 
+			.navbar-brand {
+				font-size: 1.5em;
+
+			}
 		}
 
-		#featured-tracks {
-			.track {
-				height: 300px;
-				margin: 10px auto;
-				background-color: grey;
+		#featured-container {
+
+			text-align: center;
+			margin: 25px auto;
+
+			#featured-track {
+				background-color: #8285AC;
+				border-radius: 10px;
+				margin: 25px 0;
+				
+				.track {
+					height: 300px;
+					margin: 10px auto;
+
+				}
 			}
 		}
 
@@ -37,4 +53,8 @@ img {
 	height: 200px;
 	width: 200px;
 	margin-top: 50px;
+}
+
+.btn {
+	background-color: #FF7800;
 }
