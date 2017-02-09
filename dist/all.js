@@ -7,7 +7,8 @@ $(document).ready(function() {
 	$.getJSON('https://freemusicarchive.org/featured.json', function(results){
 		let track = results.aTracks[0];
 
-		let trackImageUrl = baseUrl + track.track_image_file;
+		console.log(track);
+		let trackImageUrl = baseUrl + track.album_image_file;
 
 		if(track.track_image_file === "") {
 			trackImageUrl = imageNotFound;
@@ -65,13 +66,21 @@ $('#search-button').click(function() {
 	let regExpTrack = /\(([0-9]+)\)/;
 	let matchesTrack = regExpTrack.exec($('#search').val());
 
-	//After bracket
-	let regExpAlbum = /\s(.*)/;
+	//Default to album search
+	let regExpAlbum = /(\]*\s*)(.*)/;
 	let matchesAlbum = regExpAlbum.exec($('#search').val());
+	console.log("reg");
+	console.log(matchesAlbum);
 
 	//Between brackets
 	let regExpArtist = /\[(.*)\]/;
 	let matchesArtist = regExpArtist.exec($('#search').val());
+
+	//After bracket
+	// let regExpAlbum = /[^()[\]]([a-zA-Z0-9]+)/;
+	// let matchesAlbum = regExpAlbum.exec($('#search').val());
+	// console.log("reg");
+	// console.log(matchesAlbum[0]);
 
 	let dataset = "artists";
 	let format = ".json";
@@ -94,7 +103,7 @@ $('#search-button').click(function() {
 
 		dataset = "albums";
 		id = "&album_title=";
-		match = matchesAlbum[1];
+		match = matchesAlbum[2];
 	}
 	else if(matchesArtist) {
 		console.log("matchesArtist");
@@ -198,12 +207,12 @@ var getAlbumInfo = function(album) {
 
 var getAlbumPlayer = function(albumId) {
 	return	"<div class='track-info sound col-4'>" +
-				'<object width="300" height="220">' + 
+				'<object width="100%" height="220">' + 
 					'<param name="movie" value="https://freemusicarchive.org/swf/playlistplayer.swf"/>' + 
 					'<param name="flashvars" value="playlist=https://freemusicarchive.org/services/playlists/embed/album/' + 
 						albumId + '.xml' + '"/>' + 
 					'<param name="allowscriptaccess" value="sameDomain"/>' + 
-					'<embed type="application/x-shockwave-flash" src="https://freemusicarchive.org/swf/playlistplayer.swf" width="300" height="220" flashvars="playlist=https://freemusicarchive.org/services/playlists/embed/album/' + 
+					'<embed type="application/x-shockwave-flash" src="https://freemusicarchive.org/swf/playlistplayer.swf" height="220" flashvars="playlist=https://freemusicarchive.org/services/playlists/embed/album/' + 
 						albumId + '.xml' + '" allowscriptaccess="sameDomain" />' + 
 				'</object>' +
 			"</div>";	
@@ -221,7 +230,7 @@ var getTrackInfo = function(track) {
 	return	"<div class='track-info col-5'>" +
 				"<p><strong>Album:</strong> " + track.album_title + "</p>" +
 				"<p><strong>Artist:</strong> " + track.artist_name + "</p>" +
-				"<a href='" + track.artist_website + "' target='_blank'>Artist Website: " + track.artist_website + "</p></a>" +
+				"<a href='" + track.artist_website + "' target='_blank'>Website: " + track.artist_website + "</p></a>" +
 				"<p><strong>Track:</strong> " + track.track_title + "</p>" +
 				"<p><strong>Favorites:</strong> " + track.track_favorites + "</p>" +
 				"<p><strong>Listens:</strong> " + track.track_listens + "</p>" +
@@ -230,12 +239,12 @@ var getTrackInfo = function(track) {
 
 var getTrackPlayer = function(trackId) {
 	return	"<div class='track-info sound col-4'>" +
-				'<object width="300" height="50">' + 
+				'<object width="100%" height="50">' + 
 					'<param name="movie" value="https://freemusicarchive.org/swf/trackplayer.swf"/>' + 
 					'<param name="flashvars" value="track=https://freemusicarchive.org/services/playlists/embed/track/' + 
 						trackId + '.xml' + '"/>' + 
 					'<param name="allowscriptaccess" value="sameDomain"/>' + 
-					'<embed type="application/x-shockwave-flash" src="https://freemusicarchive.org/swf/trackplayer.swf" width="300" height="50" flashvars="track=https://freemusicarchive.org/services/playlists/embed/track/' + 
+					'<embed type="application/x-shockwave-flash" src="https://freemusicarchive.org/swf/trackplayer.swf" height="50" flashvars="track=https://freemusicarchive.org/services/playlists/embed/track/' + 
 						trackId + '.xml' + '" allowscriptaccess="sameDomain" />' + 
 				'</object>' +
 			"</div>";	

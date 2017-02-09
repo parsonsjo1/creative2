@@ -1,10 +1,11 @@
 html {
   height: 100%; }
   html body {
-    height: inherit; }
+    height: inherit;
+    background-color: #6DCDC7; }
     html body .navbar {
       font-size: 2em;
-      background-color: #070B40; }
+      background-color: #025852; }
       html body .navbar .navbar-brand {
         font-size: 1.5em;
         color: white; }
@@ -12,7 +13,7 @@ html {
       text-align: center;
       margin: 25px auto; }
       html body .results .track {
-        background-color: #BABBC5;
+        background-color: #C2EFEC;
         border-radius: 10px;
         margin: 25px 0;
         text-align: left; }
