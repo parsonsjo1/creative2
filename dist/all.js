@@ -66,11 +66,11 @@ $('#search-button').click(function() {
 	let matchesTrack = regExpTrack.exec($('#search').val());
 
 	//After bracket
-	let regExpAlbum = /\](.*)/;
+	let regExpAlbum = /\s(.*)/;
 	let matchesAlbum = regExpAlbum.exec($('#search').val());
 
 	//Between brackets
-	let regExpArtist = /\[(.*?)\]/;
+	let regExpArtist = /\[(.*)\]/;
 	let matchesArtist = regExpArtist.exec($('#search').val());
 
 	let dataset = "artists";
@@ -81,6 +81,7 @@ $('#search-button').click(function() {
 
 	//if not undefined
 	if(matchesTrack) {
+		console.log("matchesTrack");
 		isTrack = true;
 
 		dataset = "tracks";
@@ -88,25 +89,29 @@ $('#search-button').click(function() {
 		match = matchesTrack[1];
 	}
 	else if(matchesAlbum) {
+		console.log("matchesAlbum");
 		isAlbum = true;
 
 		dataset = "albums";
-		id = "&album_name=";
+		id = "&album_title=";
 		match = matchesAlbum[1];
 	}
 	else if(matchesArtist) {
+		console.log("matchesArtist");
 		isArtist = true;
 
 		dataset = "albums";
 		id = "&artist_handle=";
 		match = matchesArtist[1];
+		console.log(matchesArtist);
 	}
 	else {
 		console.log('no matches found');
 		return;
 	}
+	match = match.trim();
+	console.log("match " + match);
 
-	//console.log("match " + match);
 
 
 	//Append results
@@ -130,7 +135,7 @@ $('#search-button').click(function() {
 
 		if(isAlbum) {
 			$.each(matchResults.dataset, function(index, album) {
-				console.log(album);
+				console.log("here");
 				let albumImageUrl = album.album_image_file;
 				
 				if(album.album_image_file === "") {
@@ -147,18 +152,31 @@ $('#search-button').click(function() {
 		}
 
 		if(isArtist) {
+			$.each(matchResults.dataset, function(index, album) {
+				console.log("here");
+				let albumImageUrl = album.album_image_file;
+				
+				if(album.album_image_file === "") {
+					albumImageUrl = imageNotFound;
+				}
 
-			let artistImage = getImage();
-			let artistInfo = getArtistInfo();
-			let artistPlayer = getArtistPlayer();
+				let albumImage = getImage(albumImageUrl);
+				
+				let albumInfo = getAlbumInfo(album);
+				let albumPlayer = getAlbumPlayer(album.album_id);
 
-			appendToTag('#result', artistImage, artistInfo, artistPlayer);
+				appendToTag('#result', albumImage, albumInfo, albumPlayer);
+			});
+			// let artistImage = getImage();
+			// let artistInfo = getArtistInfo();
+			// let artistPlayer = getArtistPlayer();
+
+			// appendToTag('#result', artistImage, artistInfo, artistPlayer);
 		}
 	});
 });
 
 var appendToTag = function(tagToAppendTo, picture, info, player) {
-	console.log(player);
 
 	//Create featured track of the week
 	$(tagToAppendTo).append(
@@ -173,7 +191,7 @@ var getAlbumInfo = function(album) {
 				"<p><strong>Album:</strong> " + album.album_title + "</p>" +
 				"<p><strong>Artist:</strong> " + album.artist_name + "</p>" +
 				"<a href='" + album.artist_url + "' target='_blank'>Artist Website: " + album.artist_url + "</p></a>" +
-				"<p><strong>Favorites:</strong> " + album.favorites + "</p>" +
+				"<p><strong>Favorites:</strong> " + album.album_favorites + "</p>" +
 				"<p><strong>Listens:</strong> " + album.album_listens + "</p>" +
 			"</div>";
 }
@@ -205,7 +223,7 @@ var getTrackInfo = function(track) {
 				"<p><strong>Artist:</strong> " + track.artist_name + "</p>" +
 				"<a href='" + track.artist_website + "' target='_blank'>Artist Website: " + track.artist_website + "</p></a>" +
 				"<p><strong>Track:</strong> " + track.track_title + "</p>" +
-				"<p><strong>Favorites:</strong> " + track.favorites + "</p>" +
+				"<p><strong>Favorites:</strong> " + track.track_favorites + "</p>" +
 				"<p><strong>Listens:</strong> " + track.track_listens + "</p>" +
 			"</div>";
 }
