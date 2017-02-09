@@ -16,12 +16,12 @@ html {
 			}
 		}
 
-		#featured-container {
+		.results {
 
 			text-align: center;
 			margin: 25px auto;
 
-			#featured-track {
+			.track {
 				background-color: #BABBC5;
 				border-radius: 10px;
 				margin: 25px 0;
@@ -29,6 +29,7 @@ html {
 				
 				.track-picture {
 					height: 300px;
+					text-align: center;
 					
 					img {
 						margin-top: 50px;
@@ -36,45 +37,33 @@ html {
 				}
 
 				.track-info {
-					margin-top: 50px;
+					margin: auto 0;
+				}
+
+				.sound {
+					text-align: center;
 				}
 			}
 		}
-
-		#search-container {
-			.btn {
-				width: 100%;
-				background-color: #FF7800;
-
-				&:hover {
-					cursor: pointer;
-				}
-			}
-		}
-
-		#results-container {
-			#result {
-				.fa-play,.fa-stop {
-					&:hover {
-						cursor: pointer;	
-					}
-				}
-
-				#track-file {
-					font-size: 0px;
-				}
-
-
-			}
-		}
-
-
-
 	}
 }
 
 
 img {
-	height: 200px;
-	width: 200px;
+	max-height: 200px;
+	max-width: 200px;
+}
+
+.btn {
+	background-color: #FF7800;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.fa-play,.fa-stop {
+	font-size: 4em;
+	color: #FF7800;
+	background-color: transparent;
 }

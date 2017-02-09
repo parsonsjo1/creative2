@@ -8,30 +8,34 @@ html {
       html body .navbar .navbar-brand {
         font-size: 1.5em;
         color: white; }
-    html body #featured-container {
+    html body .results {
       text-align: center;
       margin: 25px auto; }
-      html body #featured-container #featured-track {
+      html body .results .track {
         background-color: #BABBC5;
         border-radius: 10px;
         margin: 25px 0;
         text-align: left; }
-        html body #featured-container #featured-track .track-picture {
-          height: 300px; }
-          html body #featured-container #featured-track .track-picture img {
+        html body .results .track .track-picture {
+          height: 300px;
+          text-align: center; }
+          html body .results .track .track-picture img {
             margin-top: 50px; }
-        html body #featured-container #featured-track .track-info {
-          margin-top: 50px; }
-    html body #search-container .btn {
-      width: 100%;
-      background-color: #FF7800; }
-      html body #search-container .btn:hover {
-        cursor: pointer; }
-    html body #results-container #result .fa-play:hover, html body #results-container #result .fa-stop:hover {
-      cursor: pointer; }
-    html body #results-container #result #track-file {
-      font-size: 0px; }
+        html body .results .track .track-info {
+          margin: auto 0; }
+        html body .results .track .sound {
+          text-align: center; }
 
 img {
-  height: 200px;
-  width: 200px; }
+  max-height: 200px;
+  max-width: 200px; }
+
+.btn {
+  background-color: #FF7800; }
+  .btn:hover {
+    cursor: pointer; }
+
+.fa-play, .fa-stop {
+  font-size: 4em;
+  color: #FF7800;
+  background-color: transparent; }

@@ -7,6 +7,7 @@
 		<!--Bootstrap Style-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
+		<!--Awesome Fonts-->
 		<link rel="stylesheet" href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
 
 		<!--Custom Style-->
@@ -23,35 +24,37 @@
 
 
 		<!--Featured Artists-->
-		<div class="container" id="featured-container">
+		<div class="container results" id="featured-container">
 			<!--https://freemusicarchive.org/featured.json-->
 
 			<h2>Featured Track of the Week</h2>
-			<div class="row" id="featured-track">
+			<div class="row track" id="featured-track">
 
 			</div>
 		</div>
 
 		<!--Search-->
 		<div class="container" id="search-container">
-			<div class="form-group row">
+			<div class="row">
 				<div class="col-12">
-					<input id="search" list="results" class="form-control" placeholder="Search an Artist, Album, or Track">
-					<datalist id="results">
-					</datalist>
+					<div class="input-group">
+					  	<input id="search" list="results" type="text" class="form-control" placeholder="Search an [Artist], Album, or (Track)">
+						<datalist id="results">
+						</datalist>
+					  	<span class="input-group-btn">
+					    	<button id="search-button" class="btn btn-secondary" type="button">Search</button>
+					  	</span>
+					</div>
 				</div>
 			</div>	
-
-			<button class="btn" type="button">Search</button>
-
 		</div>
 
 		<!--Results-->
-		<div class="container" id="results-container">
+		<div class="container results" id="results-container">
 			<!--https://freemusicarchive.org/featured.json-->
 
 			<h2>Search Results</h2>
-			<div class="row" id="result">
+			<div class="row track" id="result">
 
 			</div>
 		</div>
