@@ -3,6 +3,9 @@ imageNotFound = "./images/image-not-found.png";
 
 //Once the document has been loaded
 $(document).ready(function() {
+
+
+
 	//Query FMA for featured tracks
 	$.getJSON('https://freemusicarchive.org/featured.json', function(results){
 		let track = results.aTracks[0];
@@ -10,7 +13,7 @@ $(document).ready(function() {
 		console.log(track);
 		let trackImageUrl = baseUrl + track.album_image_file;
 
-		if(track.track_image_file === "") {
+		if(track.album_image_file === "") {
 			trackImageUrl = imageNotFound;
 		}
 
@@ -23,6 +26,33 @@ $(document).ready(function() {
 	});
 
 
+});
+
+$('#home').click(function() {
+	$('#result').empty();
+});
+
+$('#browse').click(function() {
+	$('#result').empty();
+
+	$.getJSON('https://freemusicarchive.org/featured.json', function(data) {	
+		console.log(data.aTracks.length);
+		for(i = 0; i < 51; i++) {
+			track = data.aTracks[i];
+			let trackImageUrl = baseUrl + track.album_image_file;
+			
+			if(track.album_image_file === "") {
+				trackImageUrl = imageNotFound;
+			}
+
+			let trackImage = getImage(trackImageUrl);
+			
+			let trackInfo = getTrackInfo(track);
+			let trackPlayer = getTrackPlayer(track.track_id);
+
+			appendToTag('#result', trackImage, trackInfo, trackPlayer);
+		};
+	});
 });
 
 //Filter songs
@@ -67,20 +97,20 @@ $('#search-button').click(function() {
 	let matchesTrack = regExpTrack.exec($('#search').val());
 
 	//Default to album search
-	let regExpAlbum = /(\]*\s*)(.*)/;
+	let regExpAlbum = /(\]\s)(.*)/;
 	let matchesAlbum = regExpAlbum.exec($('#search').val());
-	console.log("reg");
-	console.log(matchesAlbum);
+	//console.log("reg");
+	//console.log(matchesAlbum);
 
 	//Between brackets
 	let regExpArtist = /\[(.*)\]/;
 	let matchesArtist = regExpArtist.exec($('#search').val());
 
 	//After bracket
-	// let regExpAlbum = /[^()[\]]([a-zA-Z0-9]+)/;
-	// let matchesAlbum = regExpAlbum.exec($('#search').val());
-	// console.log("reg");
-	// console.log(matchesAlbum[0]);
+	let regExp = /[^()[\]]([a-zA-Z0-9]+)/;
+	let matches = regExp.exec($('#search').val());
+	//console.log("reg");
+	//console.log(matches[0]);
 
 	let dataset = "artists";
 	let format = ".json";
@@ -114,6 +144,14 @@ $('#search-button').click(function() {
 		match = matchesArtist[1];
 		console.log(matchesArtist);
 	}
+	else if(matches) {
+		console.log("matchesAlbum");
+		isAlbum = true;
+
+		dataset = "albums";
+		id = "&album_title=";
+		match = matches[0];
+	}
 	else {
 		console.log('no matches found');
 		return;
@@ -121,13 +159,11 @@ $('#search-button').click(function() {
 	match = match.trim();
 	console.log("match " + match);
 
-
-
 	//Append results
-	$.getJSON('https://freemusicarchive.org/api/get/' + dataset + format + format + key + id + match, function(matchResults){
+	$.getJSON('https://freemusicarchive.org/api/get/' + dataset + format + key + id + match, function(matchResults){
 		if(isTrack) {
 			let track = matchResults.dataset[0];
-
+			console.log(track);
 			let trackImageUrl = track.track_image_file;
 
 			if(track.track_image_file === "") {

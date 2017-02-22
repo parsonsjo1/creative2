@@ -9,6 +9,11 @@ html {
       html body .navbar .navbar-brand {
         font-size: 1.5em;
         color: white; }
+      html body .navbar .link {
+        margin: 20px 10px;
+        color: white;
+        float: right;
+        cursor: pointer; }
     html body .results {
       text-align: center;
       margin: 25px auto; }
